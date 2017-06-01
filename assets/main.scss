@@ -1,0 +1,17 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+$brand-color: #bf0000;
+$brand-darker-color: #8c0000;
+
+.footer-col-wrapper a {
+  color: $brand-darker-color;
+}
+.post-content a {
+  color: $brand-color;
+}
+code {
+  font-size: 100%;
+}

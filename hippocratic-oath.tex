@@ -1,0 +1,82 @@
+%~ \showframe%\showgrid
+%~ \setupinteraction[state=start, style=, color=,]
+%~ \enabledirectives[references.border=red]
+\mainlanguage[en]
+\setuplanguage[en][patterns={en, agr}]
+\definepapersize[HippPaper][width=6in, height=9in]
+\setuppapersize[HippPaper]
+
+%~ \setuplayout[setups=*lessstrict, margin=1.5cm, width=fit, backspace=2cm, topspace=2cm, bottomspace=2cm, height=fit, header=1.15cm, footer=1.15cm]
+%~ \setuplayout[setups=*lessstrict]
+%~ \startsetups[*lessstrict]
+    %~ \setup[reset]
+    %~ \widowpenalty=10000
+    %~ \clubpenalty=10000
+    %~ \brokenpenalty=0
+%~ \stopsetups
+
+\setupindenting[medium,always]
+\setupinterlinespace[line=3ex]
+\setupwhitespace[medium]
+
+\setuppagenumbering[alternative=doublesided,location={bottom,margin}]
+
+\setupbodyfontenvironment[default][em=italic, x=.95]
+
+\definefontfeature[default][default][script=latn,expansion=quality,protrusion=quality,itlc=yes,textitalics=yes,lnum=yes]
+\setupitaliccorrection[global,always]
+\setupalign[hanging,hz]
+%~ \definefallbackfamily[mainface][serif][Theano Didot][preset=range:greek,it={Old Standard-Italic}, force=yes]
+%~ \definefontfamily[mainface][serif][GaramondNo8][sc=NewG8 Regular SC]
+
+%~ \definefontfamily[mainface][serif][GFS Didot]
+\definefontfamily[mainface][serif][FreeSerif]
+\setupbodyfont[mainface, 13pt]
+
+\setuphead[title][align=center, indentnext=yes]
+
+\setuplinenumbering[location=outer, step=3, method=bychapter, style=\tfxx, align=left, distance=0.4em, width=0.4cm]
+
+\startsetups[setups:linenote]
+  \setupwhitespace[small]
+  \setupinterlinespace[line=2.5ex]
+\stopsetups
+
+\setupinterlinespace[interlinespacenotes][line=2.5ex]
+
+\setupnotes[spacebefore=3*halfline, spaceinbetween=line]
+
+\definenote[Dict]
+\setupnote[Dict][setups=setups:linenote, alternative=columns, n=2, rule=off, split=verystrict, scope=text, inbetween=\hskip1.5em, align={hanging,hz}]
+\setupnotation[Dict][number=no, hyphenation=loose]%, width=broad
+
+\definelinenote[grammatical]
+\setupnote[grammatical][setups=setups:linenote, rule=off,  paragraph=yes, split=verystrict, scope=text, inbetween=\hskip1.5em, compress=yes, align={hanging,hz}]
+\setupnotation[grammatical][numbercommand=, alternative=serried, distance=1em]
+
+\unexpanded\def\doGrammar#1#2#3%
+   {\startgrammatical[#1]{#2: #3}#2\stopgrammatical[#1]}
+
+\newcounter\countgrammatical
+\unexpanded\def\grammar
+   {\doglobal\increment\countgrammatical
+    \normalexpanded{\doGrammar{Gramm:\countgrammatical}}}
+
+%~ \setuplist[dict][textstyle={\tfx}, order=title, pagenumber=no, columns=2]
+
+\define[1]\dict{\Dict{#1}\index{#1}}
+%~ \define[1]\dict{\index{#1}}
+
+\setupregister[index][language=agr, style=\bf, textstyle=\tf, pagenumber=no, n=1, align={verybroad, hz,hanging}, method={zm,zc}, command={\hskip.35\textwidth}]%command={\centerline}
+
+\starttext
+\title{Ἱπποκράτους ὅρκος}
+
+\startlinenumbering
+ὄμνυμι\dict{ὄμνυμι: to swear} Ἀπόλλωνα\dict{Ἀπόλλων, -ωνος, ὁ: Apollo} ἰητρὸν\dict{ἰητρός, ὁ: one who heals, a physician} καὶ \grammar{Ἀσκληπιὸν\dict{Ἀσκληπιός, ὁ: Asclepius}}{acc. with ὄμνυμι “I swear {\em by Asclepius}” Asclepius is the son of Apollo and the god of healing} καὶ \grammar{Ὑγείαν\dict{Ὑγεία, ἡ: Hygene} καὶ Πανάκειαν\dict{Πανάκεια, ἡ: Panacea}}{“Hygene” and “Panacea” are two of the daughters of Asclepius} καὶ θεοὺς πάντας τε καὶ πάσας, ἵστορας\dict{ἵστωρ, -ορος, ὁ: a judge, witness} \grammar{ποιεύμενος}{pr. part. nom. (=ποιούμενος) “I, making them witnesses”}, \grammar{ἐπιτελέα}{acc. pred. agreeing with ὅρκον “to make the oath {\em accomplished}”} \grammar{ποιήσειν\dict{ποιέω: to make, do}}{fut. inf. complementing ὄμνυμι} κατὰ δύναμιν\dict{δύναμις, -ιος, ἡ: power, strength, ability} καὶ κρίσιν\dict{κρίσις, -ιος, ἡ: discernment, judgment} ἐμὴν ὅρκον\dict{ὅρκος, ὁ: an oath} τόνδε καὶ συγγραφὴν\dict{συγγραφή, ἡ: a written contract, bond} τήνδε· \grammar{ἡγήσεσθαι\dict{ἡγέομαι: to go before, consider}}{fut. inf. also complementing ὄμνυμι “I swear {\em to consider}”} μὲν \grammar{τὸν διδάξαντά\dict{διδάσκω: to teach X (acc.) to Y (acc.)}}{ao. part. “the one who taught me”} με τὴν τέχνην\dict{τέχνη, ἡ: art, skill} ταύτην \grammar{ἴσα\dict{ἴσος, -η, -ον: equal to, the same as}}{neut. pl. acc. adverbial, “equally to” \char43\ dat.} γενέτῃσιν\dict{γενέτης, -ου, ὁ: a father, parent} ἐμοῖς, καὶ βίου\dict{βίος, ὁ: life} \grammar{κοινώσεσθαι\dict{κοινόω: to make common, be a partner in (\char43\ gen.)}}{fut. inf. with ὄμνυμι “to be a partner of” \char43\ gen.}, καὶ \grammar{χρεῶν\dict{χρέος, τό: something needed}}{gen. pl. after μετάδοσιν “sharing {\em of needed things}”} \grammar{χρηΐζοντι\dict{χρῄζω: to need, lack}}{pr. part. dat. ind. obj. “to him needing”} μετάδοσιν\dict{μετάδοσις, -εως, ἡ: a giving, sharing} \grammar{ποιήσεσθαι}{fut. inf. also after ὄμνυμι “to make a sharing” i.e. to share \char43\ gen.}, καὶ γένος\dict{γένος, -εος, τό: a race, family} \grammar{τὸ ἐξ αὐτοῦ}{an attributive phrase modifying γένος “the offspring of him”} ἀδελφοῖς\dict{ἀδελφός, ὁ: a brother} \grammar{ἴσον}{neut. acc. pred. of γένος “to consider the family {\em equal to}” \char43\ dat.} \grammar{ἐπικρινεῖν\dict{ἐπικρίνω: to decide, consider}}{fut. inf. after ὄμνυμι} ἄρρεσι\dict{ἄρρην, -εν: male}, καὶ \grammar{διδάξειν}{fut. inf. “to teach”} τὴν τέχνην ταύτην, \grammar{ἢν χρηΐζωσι\dict{χρῄζω: to need, want (\char43\ inf.)}}{pr. subj. in prot. of pr. gen. condition, “if they desire” \char43\ inf. (then I swear to teach)} μανθάνειν\dict{μανθάνω: to learn}, ἄνευ\dict{ἄνευ: without (\char43\ gen.)} μισθοῦ\dict{μισθός, ὁ: wages, pay, hire} καὶ συγγραφῆς, παραγγελίης\dict{παραγγελίη, ἡ: a command, order} τε καὶ \grammar{ἀκροήσιος\dict{ἀκρόησις, -ιος, ἡ: a hearing, listening} καὶ τῆς λοίπης\dict{λοιπός, -ή, -όν: remaining, rest} ἁπάσης μαθήσιος\dict{μάθησις, -ιος, ἡ: a learning}}{gen. sing. with μετάδοσιν, “share {\em of oral instruction ... of learning}”} μετάδοσιν \grammar{ποιήσεσθαι}{fut. inf. with ὄμνυμι, “{\em to make} a sharing”} υἱοῖς\dict{υἱός, ὁ: a son} τε ἐμοῖς καὶ \grammar{τοῖς}{dat. ind. obj. “to the sons”} \grammar{τοῦ ἐμὲ διδάξαντος}{ao. part. gen. “(to the sons) {\em of the one who taught}”}, καὶ μαθητῇσι\dict{μαθητής, -οῦ, ὁ: a learner, pupil} \grammar{συγγεγραμμένοις}{perf. part. dat. pl. “to those who have signed”} τε καὶ \grammar{ὡρκισμένοις\dict{ὁρκίζω: to bind by oath}}{perf. part. dat. “to those who have sworn”} νόμῳ\dict{νόμος, ὁ: a custom, law} ἰητρικῷ\dict{ἰητρικός, -ή, -όν: of a physician, medical}, \grammar{ἄλλῳ δὲ οὐδενί}{dat. ind. obj. “but to no other”}. \grammar{διαιτήμασί\dict{διαίτημα, -ατος, τό: a regimen, diet}}{dat. pl. after χρήσομαι “I will use {\em dietary regimes}”} τε χρήσομαι \grammar{ἐπ ̓ ὠφελείῃ\dict{ὠφέλειη, ἡ: help, aid, benefit}}{“for the benefit of” \char43\ gen.} καμνόντων\dict{κάμνω: to be sick, suffer from illness} κατὰ δύναμιν καὶ κρίσιν ἐμήν, \grammar{ἐπὶ δηλήσει\dict{δήλησις, -ιος, ἡ: ruin, bane}}{“as a check upon bane”} δὲ καὶ ἀδικίῃ\dict{ἀδικίη, ἡ: wrongdoing, injustice} \grammar{εἴρξειν}{fut. inf. after ὄμνυμι “to keep them safe”}. \grammar{οὐ δώσω\dict{δίδωμι: to give}}{fut. “I will not give”} δὲ οὐδὲ φάρμακον οὐδενὶ \grammar{αἰτηθεὶς}{ao. pas. part. concessive, “although having been asked”} θανάσιμον, οὐδὲ ὑφηγήσομαι συμβουλίην τοιήνδε· ὁμοίως δὲ οὐδὲ γυναικὶ \grammar{πεσσὸν φθόριον}{a stone-shaped object inserted to prompt an abortion} δώσω. ἁγνῶς δὲ καὶ ὁσίως \grammar{διατηρήσω}{fut. “I will maintain”} βίον τὸν ἐμὸν καὶ τέχνην τὴν ἐμήν. \grammar{οὐ τεμέω}{fut. of τέμνω “I will not cut”} δὲ \grammar{οὐδὲ μὴν}{“not even those”} \grammar{λιθιῶντας}{pr. part. “those suffering from stones”}, ἐκχωρήσω δὲ ἐργάτῃσιν \grammar{ἀνδράσι}{dat. of sep. after ἐκχωρήσω “I will yield {\em to men}”} \grammar{πρήξιος}{gen. s. (= πράξεως) “the practioners {\em of this practice}”} τῆσδε. ἐς οἰκίας δὲ \grammar{ὁκόσας ἂν ἐσίω}{pr. subj. in gen. rel. cl. “into whatever homes I enter”}, \grammar{ἐσελεύσομαι}{fut. of ἐσ-έρχομαι, “I will enter”} ἐπ ̓ ὠφελείῃ \grammar{καμνόντων}{pr. part. gen. “of those who are ill”}, \grammar{ἐκτὸς ἐὼν}{pr. part. “being outside of” \char43\ gen.} πάσης ἀδικίης ἑκουσίης καὶ φθορίης, τῆς τε ἄλλης καὶ \grammar{ἀφροδισίων ἔργων}{“of the works of Aphrodite” i.e. of sex} ἐπί τε γυναικείων σωμάτων καὶ ἀνδρῴων, ἐλευθέρων τε καὶ δούλων. \grammar{ἃ δ ̓ ἂν ἐν θεραπείῃ ἢ ἴδω}{ao. subj. of εἶδον in gen. rel. cl. “whatever I see”} ἢ \grammar{ἀκούσω}{ao. subj. “whatever {\em I hear}”}, ἢ \grammar{καὶ ἄνευ}{“even apart from” \char43\ gen.} θεραπείης κατὰ βίον ἀνθρώπων, ἃ μὴ χρ\dict{χρέομαι: to use} ή ποτε \grammar{ἐκλαλεῖσθαι}{pr. inf. complementing χρή “what is not necessary {\em to spread abroad}”} ἔξω, σιγήσομαι, ἄρρητα \grammar{ἡγεύμενος}{pr. part. (=ἡγούμενος) “considering such things” \char43\ inf.} εἶναι τὰ τοιαῦτα. ὅρκον μὲν οὖν μοι τόνδε \grammar{ἐπιτελέα\dict{ἐπιτελής, -ές: completed, accomplished}}{acc. pred. “making this oath {\em fulfilled}”} \grammar{ποιέοντι}{pr. part. dat. “to me making”}, καὶ \grammar{μὴ συγχέοντι}{pr. part. dat. “and to me not breaking” μὴ indicates a conditional sense “if I do not break”}, \grammar{εἴη}{opt. wish for the future “may it be possible” \char43\ inf.} \grammar{ἐπαύρασθαι}{ao. inf. “to share in” \char43\ gen.} καὶ βίου καὶ τέχνης \grammar{δοξαζομένῳ}{pr. part. dat. also agreeing with μοι “being famous”} παρὰ πᾶσιν ἀνθρώποις ἐς τὸν αἰεὶ χρόνον· \grammar{παραβαίνοντι}{pr. part. dat. “but (to me) deviating”} δὲ καὶ ἐπιορκέοντι, \grammar{τἀναντία}{(sc. εἴη) “may the opposite things be”} τούτων.
+\stoplinenumbering
+
+\title{Vocabulary}
+\placeindex
+\stoptext
+
